@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Rematrículas — Automação escolar",
+  "version": "0.2.2",
+  "description": "Lê sua planilha local e auxilia o envio individual pelo WhatsApp Web.",
+  "minimum_chrome_version": "120",
+  "permissions": [
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://web.whatsapp.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Abrir painel de rematrículas"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; connect-src 'self'"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://web.whatsapp.com/*"
+      ],
+      "js": [
+        "navigation-guard.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ]
+}
